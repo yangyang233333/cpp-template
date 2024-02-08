@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <fmt/chrono.h>
 #include <fmt/color.h>
 #include <fmt/core.h>
@@ -12,4 +13,5 @@ int main() {
     cout << "Hello World!" << endl;
     fmt::print("{}\n", "Hello World!");
     spdlog::info("1+1={}", 2);
+    auto ptr = make_shared<int>(1);
 }

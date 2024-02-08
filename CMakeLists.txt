@@ -22,7 +22,11 @@ list(FILTER SRC_FILES EXCLUDE REGEX "${MY_DIR}/src/file_you_dont_want.cc" )
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
-# link 3rdlib
+# Link fmt libary
 find_package(fmt REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
+# Link spdlog libary
 find_package(spdlog REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
+# Link tcmalloc libary
+target_link_libraries(${PROJECT_NAME} PRIVATE tcmalloc)
