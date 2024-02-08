@@ -18,7 +18,7 @@ include_directories(${ROOT_DIR}/src)
 file(GLOB_RECURSE SRC_FILES ${ROOT_DIR}/src/*.cc)
 
 # Exclude some files from ${SRC_FILES}
-list(FILTER SRC_FILES EXCLUDE REGEX "${MY_DIR}/src/file_you_dont_want.cc" )
+list(FILTER SRC_FILES EXCLUDE REGEX ${ROOT_DIR}/src/file_you_dont_want.cc)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
