@@ -22,6 +22,14 @@ list(FILTER SRC_FILES EXCLUDE REGEX ${ROOT_DIR}/src/file_you_dont_want.cc)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
+# If build with 'Debug' mode, then enable AddressSanitizer
+if(CMAKE_BUILD_TYPE MATCHES Debug)
+    message("====================== Enabling AddressSanitizer ======================")
+    message("====================== Enabling AddressSanitizer ======================")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")
+    set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address -g")
+endif()
+
 # Link fmt libary
 find_package(fmt REQUIRED)
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
