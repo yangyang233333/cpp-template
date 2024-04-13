@@ -24,17 +24,14 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 # If build with 'Debug' mode, then enable AddressSanitizer
 if(CMAKE_BUILD_TYPE MATCHES Debug)
-    message("====================== Enabling AddressSanitizer ======================")
-    message("====================== Enabling AddressSanitizer ======================")
+    message("====================== Debug Mode ======================")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")
     set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address -g")
 endif()
 
-# Link fmt libary
+# Link 3rd libary
 find_package(fmt REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)
-# Link spdlog libary
 find_package(spdlog REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog)
-# Link tcmalloc libary
-target_link_libraries(${PROJECT_NAME} PRIVATE tcmalloc)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog tcmalloc)
+
