@@ -6,7 +6,8 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED True)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_BUILD_TYPE Release)
+# set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_BUILD_TYPE Debug)
 
 # Root directory
 set(ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -25,9 +26,10 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 # If build with 'Debug' mode, then enable AddressSanitizer
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     message("====================== Debug Mode ======================")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fno-omit-frame-pointer -g")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fsanitize=address -fno-omit-frame-pointer -g")
     set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address -g")
 endif()
+
 
 # Link 3rd libary
 find_package(fmt REQUIRED)
