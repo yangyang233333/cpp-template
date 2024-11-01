@@ -28,5 +28,12 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 find_package(fmt CONFIG REQUIRED)
 find_package(spdlog CONFIG REQUIRED)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog tcmalloc)
+# pkg-config使用动态库
+# 1. 导入${PROTOBUF_INCLUDE_DIRS}头文件
+# 2. 链接${PROTOBUF_LIBRARIES}动态库
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(PROTOBUF REQUIRED protobuf)
+include_directories(${PROTOBUF_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog ${PROTOBUF_LIBRARIES} tcmalloc)
 
