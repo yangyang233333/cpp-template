@@ -20,10 +20,6 @@ else()
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNDEBUG -march=native -mtune=native -O3 -mavx2 -pthread -mfma -msse2 -ftree-vectorize -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free -fopenmp -fopenmp-simd -funroll-loops -Wfatal-errors -DUSE_AVX2")
 endif()
 
-# 3rd libary
-find_package(fmt CONFIG REQUIRED)
-find_package(spdlog CONFIG REQUIRED)
-
 # Header directory
 include_directories(${ROOT_DIR}/src)
 
@@ -34,9 +30,15 @@ file(GLOB_RECURSE SRC_FILES ${ROOT_DIR}/src/*.cc)
 list(FILTER SRC_FILES EXCLUDE REGEX ${ROOT_DIR}/src/file_you_dont_want.cc)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
-target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
 
-# fuse3
+# cmake package: fmt, spdlog
+find_package(fmt CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
+find_package(cxxopts CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog
+                                              cxxopts::cxxopts)
+
+# pkg-config package: fuse3
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(FUSE3 REQUIRED fuse3>=3.16)
 target_link_libraries(${PROJECT_NAME} PRIVATE ${FUSE3_LIBRARIES})
