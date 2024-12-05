@@ -35,3 +35,10 @@ list(FILTER SRC_FILES EXCLUDE REGEX ${ROOT_DIR}/src/file_you_dont_want.cc)
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt spdlog::spdlog)
+
+# fuse3
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FUSE3 REQUIRED fuse3>=3.16)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${FUSE3_LIBRARIES})
+target_include_directories(${PROJECT_NAME} PRIVATE ${FUSE3_INCLUDE_DIRS})
+target_compile_options(${PROJECT_NAME} PRIVATE ${FUSE3_CFLAGS_OTHER})
