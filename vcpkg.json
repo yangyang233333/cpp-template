@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    "fmt",
+    "libfuse",
+    "tabulate",
+    "brpc"
+  ]
+}
