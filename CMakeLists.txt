@@ -29,13 +29,14 @@ target_include_directories(cpptest PRIVATE ${ROOT_DIR}/src)
 
 find_package(fmt CONFIG REQUIRED)
 find_package(tabulate CONFIG REQUIRED)
-
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(FUSE3 REQUIRED fuse3)
-target_include_directories(cpptest PRIVATE ${FUSE3_INCLUDE_DIRS})
-
 target_link_libraries(cpptest PRIVATE 
     tabulate::tabulate 
-    fmt::fmt 
-    ${FUSE3_LIBRARIES}
+    fmt::fmt
 )
+
+# pkg-config package: fuse3
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(FUSE3 REQUIRED fuse3>=3.16)
+target_link_libraries(cpptest PRIVATE ${FUSE3_LIBRARIES})
+target_include_directories(cpptest PRIVATE ${FUSE3_INCLUDE_DIRS})
+target_compile_options(cpptest PRIVATE ${FUSE3_CFLAGS_OTHER})
