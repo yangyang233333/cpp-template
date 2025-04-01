@@ -1,18 +1,19 @@
-#include "simple_fuse.h"
 #include <cassert>
 #include <chrono>
-#include <fmt/base.h>
-#include <fmt/core.h>
-#include <fmt/format.h>
 #include <iomanip>
 #include <iostream>
 #include <list>
 #include <mutex>
 #include <thread>
+#include <fiu.h>
 using namespace std;
-
+static auto get_current_timestamp() {
+    auto now = std::chrono::system_clock::now();
+    auto timestamp =
+        std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch()).count();
+    return timestamp;
+  }
 int main(int argc, char *argv[]) {
-  fmt::println("Hello");
-  fmt::println("Hello {}", "World!");
-  // return fuse_main(argc, argv, &demo_ops, NULL);
+    cout << get_current_timestamp() << endl;
+
 }

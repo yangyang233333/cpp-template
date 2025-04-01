@@ -3,7 +3,10 @@ if [ ! -d build ]; then
 fi
 
 # cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build -S . 
-cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake -B build -S . 
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
+      -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
+      -DCMAKE_MAKE_PROGRAM=make \
+      -B build -S .
 cmake --build build
 
 if [ ! $? -eq 0 ]; then
