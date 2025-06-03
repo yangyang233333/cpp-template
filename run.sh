@@ -5,7 +5,7 @@ fi
 # cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -B build -S . 
 cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 \
       -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake \
-      -DCMAKE_MAKE_PROGRAM=make \
+      -DCMAKE_MAKE_PROGRAM=ninja -G Ninja \
       -B build -S .
 cmake --build build
 
